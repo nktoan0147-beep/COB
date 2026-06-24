@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenWear - Thanh toán</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .product-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .tail-container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .tiny-text {
+            font-size: 9px;
+            line-height: 1.1;
+            color: #9ca3af;
+        }
+        
+        .drip-fee {
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b sticky top-0 z-50">
+            <div class="tail-container px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">G</div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight">GreenWear</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-8 text-sm">
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Cửa hàng</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Bộ sưu tập</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 tail-container px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column - Order Summary -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-3xl shadow-sm border p-8 sticky top-24">
+                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-emerald-600"></i>
+                        Đơn hàng của bạn
+                    </h2>
+                    
+                    <!-- Product -->
+                    <div class="flex gap-6">
+                        <div class="w-28 h-28 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                            <!-- NEW: Product image changed -->
+                            <img src="https://i.postimg.cc/Hx0Cc895/goods-478230-sub14-3x4.avif" 
+                                 alt="Áo khoác Unecclo" 
+                                 class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <!-- Changed: Giá tiền xuống dòng riêng trong Order Summary -->
+                            <!-- Trước đây dùng flex justify-between để nằm cùng hàng với tên sản phẩm -->
+                            <div>
+                                <!-- NEW: Product name changed to "Áo khoác Unecclo" -->
+                                <h3 class="font-semibold text-lg">Áo khoác Unecclo</h3>
+                                <p class="text-sm text-gray-500">Màu Xanh Lá • Size M</p>
+                                <!-- Price moved to its own line below color/size -->
+                                <p class="font-semibold text-xl mt-1">499.000 đ</p>
+                            </div>
+                            <p class="text-xs text-emerald-600 mt-2 flex items-center gap-1">
+                                <i class="fa-solid fa-leaf"></i> Sản phẩm thân thiện môi trường
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Scarcity / Urgency Nudge with Social Proof - ONLY for Group 4 -->
+                    <!-- Replaced countdown timer with static social proof text -->
+                    <div id="scarcity-nudge" class="hidden mt-6 p-4 bg-pink-50 border border-pink-300 rounded-2xl">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-users text-pink-500 mt-1"></i>
+                            <div class="flex-1">
+                                <div class="font-bold text-lg text-pink-700">Chỉ còn 1 sản phẩm cuối cùng!</div>
+                                <div class="mt-1 text-sm text-pink-600 font-medium">
+                                    Hơn 1.284 người đã xem qua sản phẩm này!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t my-8"></div>
+
+                    <!-- Add-ons (only 2 items for Condition 4) -->
+                    <div id="addons-container" class="space-y-4">
+                        <!-- Bảo hiểm giao hàng - pre-ticked only in Group 4 -->
+                        <div class="flex items-center justify-between text-sm">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="insurance" 
+                                       class="w-5 h-5 accent-emerald-600">
+                                <div>
+                                    <span class="font-medium">Bảo hiểm giao hàng</span>
+                                    <p class="text-xs text-gray-500">Bảo vệ đơn hàng đến tay bạn</p>
+                                </div>
+                            </label>
+                            <span class="font-medium text-emerald-700">+20.000 đ</span>
+                        </div>
+
+                        <!-- NEW: Disadvantageous Defaults nudge - "Chia sẻ dữ liệu mua sắm" - pre-ticked only in Group 4 -->
+                        <div class="flex items-center justify-between text-sm">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="share-data" 
+                                       class="w-5 h-5 accent-emerald-600">
+                                <div>
+                                    <span class="font-medium">Chia sẻ dữ liệu mua sắm</span>
+                                    <p class="text-xs text-gray-500">để nhận gợi ý sản phẩm và ưu đãi tốt hơn</p>
+                                </div>
+                            </label>
+                            <span class="text-xs text-gray-400">Miễn phí</span>
+                        </div>
+                    </div>
+
+                    <!-- Drip Pricing Fee (hidden in Groups 2 & 4) -->
+                    <div id="drip-fee" class="hidden mt-4 pt-4 border-t drip-fee">
+                        <div class="flex justify-between items-center">
+                            <span>Phí XL&amp;VH</span>
+                            <span class="font-medium">+45.000 đ</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t my-8"></div>
+
+                    <!-- Total -->
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-gray-600">Tổng cộng</span>
+                        <div class="text-right">
+                            <span id="total-price" class="text-3xl font-bold">499.000</span>
+                            <span class="text-sm text-gray-500">đ</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 text-right mt-1">Đã bao gồm VAT</p>
+                </div>
+            </div>
+
+            <!-- Right Column - Checkout Form -->
+            <div class="lg:col-span-7">
+                <div class="max-w-xl">
+                    <h1 class="text-3xl font-bold mb-2">Hoàn tất thanh toán</h1>
+                    <p class="text-gray-600 mb-8">Chỉ còn một bước nữa là bạn sẽ sở hữu chiếc áo khoác bền vững này.</p>
+
+                    <!-- Shipping Form -->
+                    <form id="checkout-form" class="space-y-8">
+                        <div>
+                            <h3 class="font-semibold mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-truck text-emerald-600"></i>
+                                Thông tin giao hàng
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                                    <input type="text" id="fullName" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                                        <input type="tel" id="phone" required
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" id="email" required
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Địa chỉ giao hàng</label>
+                                    <textarea id="address" rows="3" required
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div>
+                            <h3 class="font-semibold mb-4">Phương thức thanh toán</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border-2 border-emerald-600 bg-emerald-50 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-credit-card text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">Thẻ tín dụng</p>
+                                </div>
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-qrcode text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">Ví điện tử</p>
+                                </div>
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-money-bill-wave text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">COD</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-semibold py-4 rounded-3xl text-lg shadow-lg shadow-emerald-200 flex items-center justify-center gap-3 relative">
+                            HOÀN TẤT THANH TOÁN
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <!-- VIP Trap Text -->
+                        <div id="vip-trap" class="tiny-text text-center hidden">
+                            Bằng việc bấm thanh toán, bạn đồng ý tự động gia hạn gói thành viên VIP 50.000đ/tháng.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manipulation Modal -->
+    <div id="manipulate-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[200]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <div class="text-center">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-5xl mb-4"></i>
+                <h3 class="font-semibold text-xl mb-3">Bạn có chắc muốn bỏ lựa chọn này?</h3>
+                <p id="modal-text" class="text-gray-600 leading-relaxed"></p>
+                
+                <div class="flex gap-4 mt-8">
+                    <button onclick="closeModal(false)" 
+                            class="flex-1 py-3.5 border border-gray-300 rounded-2xl font-medium hover:bg-gray-50">
+                        Để sau
+                    </button>
+                    <button onclick="closeModal(true)" 
+                            class="flex-1 py-3.5 bg-red-600 text-white rounded-2xl font-medium hover:bg-red-700">
+                        Vẫn bỏ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentGroup = 1; // 1,2,3,4 - KEPT 100% unchanged
+        let insuranceChecked = false;
+        let donationChecked = false; // kept for form compatibility (donation removed from UI)
+        let shareDataChecked = false;
+        let isProcessingUncheck = false;
+        // Note: countdown logic removed - scarcity now uses static social proof text for Group 4
+
+        // Random group assignment - KEPT 100% UNCHANGED
+        function assignGroup() {
+            const rand = Math.random();
+            if (rand < 0.25) currentGroup = 1;
+            else if (rand < 0.5) currentGroup = 2;
+            else if (rand < 0.75) currentGroup = 3;
+            else currentGroup = 4;
+            
+            console.log(`%c Phân bổ ngẫu nhiên vào Nhóm ${currentGroup}`, 'color: #10b981; font-weight: bold; font-size: 14px');
+        }
+
+        // updateTotal - updated: removed donation (+10k) as it was removed from UI
+        function updateTotal() {
+            let total = 499000;
+            if (document.getElementById('insurance') && document.getElementById('insurance').checked) total += 20000;
+            
+            const hasDrip = (currentGroup === 2 || currentGroup === 4);
+            if (hasDrip) total += 45000;
+            
+            document.getElementById('total-price').textContent = total.toLocaleString('vi-VN');
+        }
+
+        function setupCheckboxes() {
+            // NEW: For Condition 4 - pre-tick only in Group 4 for the 2 remaining items
+            const isPreChecked = (currentGroup === 4);
+            const insurance = document.getElementById('insurance');
+            const shareData = document.getElementById('share-data');
+            
+            if (insurance) insurance.checked = isPreChecked;
+            if (shareData) shareData.checked = isPreChecked;
+            
+            if (insurance) insurance.addEventListener('change', handleCheckboxChange);
+            if (shareData) shareData.addEventListener('change', handleCheckboxChange);
+            
+            updateTotal();
+        }
+
+        // UPDATED handleCheckboxChange - only intercept uncheck for Group 4 on insurance + share-data
+        function handleCheckboxChange(e) {
+            const checkbox = e.target;
+            
+            // NEW: Only Group 4 triggers manipulation modal for the two pre-ticked items
+            const manipulatableIds = ['insurance', 'share-data'];
+            
+            if (!checkbox.checked && currentGroup === 4 && manipulatableIds.includes(checkbox.id)) {
+                e.preventDefault();
+                showManipulationModal(checkbox.id, checkbox);
+                return;
+            }
+            
+            const ins = document.getElementById('insurance');
+            insuranceChecked = ins ? ins.checked : false;
+            
+            // donation removed from UI - always false for form
+            donationChecked = false;
+            
+            const sd = document.getElementById('share-data');
+            shareDataChecked = sd ? sd.checked : false;
+            
+            updateTotal();
+        }
+
+        // UPDATED showManipulationModal - adjusted texts for the two items in Condition 4 (Group 4 only)
+        function showManipulationModal(type, checkbox) {
+            const modal = document.getElementById('manipulate-modal');
+            const modalText = document.getElementById('modal-text');
+            
+            if (type === 'insurance') {
+                modalText.innerHTML = `Nếu không mua bảo hiểm, đơn hàng của bạn <strong>có nguy cơ bị hư hỏng hoặc mất mát</strong> trong quá trình vận chuyển. Bạn thực sự muốn mạo hiểm chứ?`;
+            } else if (type === 'share-data') {
+                // NEW: manipulation text for the data sharing default nudge (Group 4)
+                modalText.innerHTML = `Tắt chia sẻ dữ liệu có thể khiến bạn bỏ lỡ <strong>gợi ý sản phẩm và ưu đãi tốt hơn</strong>. Bạn có chắc muốn bỏ qua không?`;
+            }
+            
+            modal.classList.remove('hidden');
+            modal.dataset.targetCheckbox = checkbox.id;
+        }
+
+        function closeModal(confirmUncheck) {
+            const modal = document.getElementById('manipulate-modal');
+            const checkboxId = modal.dataset.targetCheckbox;
+            const checkbox = document.getElementById(checkboxId);
+            
+            modal.classList.add('hidden');
+            
+            if (confirmUncheck && checkbox) {
+                // Small artificial delay for friction - kept
+                setTimeout(() => {
+                    checkbox.checked = false;
+                    
+                    const ins = document.getElementById('insurance');
+                    insuranceChecked = ins ? ins.checked : false;
+                    
+                    donationChecked = false; // donation removed
+                    
+                    const sdEl = document.getElementById('share-data');
+                    shareDataChecked = sdEl ? sdEl.checked : false;
+                    
+                    updateTotal();
+                }, 420);
+            }
+        }
+
+        function setupNudges() {
+            const hasDripVip = (currentGroup === 2 || currentGroup === 4);
+            
+            // Drip Pricing - kept for groups 2 and 4 (original requirement)
+            const dripFeeEl = document.getElementById('drip-fee');
+            if (hasDripVip) {
+                dripFeeEl.classList.remove('hidden');
+            } else {
+                dripFeeEl.classList.add('hidden');
+            }
+            
+            // VIP Trap - kept for groups 2 and 4 (original requirement)
+            const vipTrap = document.getElementById('vip-trap');
+            if (hasDripVip) {
+                vipTrap.classList.remove('hidden');
+            } else {
+                vipTrap.classList.add('hidden');
+            }
+
+            // NEW: Scarcity nudge with social proof - ONLY for Group 4
+            const scarcityNudge = document.getElementById('scarcity-nudge');
+            if (scarcityNudge) {
+                if (currentGroup === 4) {
+                    scarcityNudge.classList.remove('hidden');
+                    // No longer uses countdown timer - static social proof instead
+                } else {
+                    scarcityNudge.classList.add('hidden');
+                }
+            }
+        }
+
+        // Countdown timer removed - Scarcity nudge for Group 4 now uses static social proof text only.
+        // (Previously used live countdown; replaced per latest requirement)
+
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('border-emerald-600', 'bg-emerald-50');
+                opt.classList.add('border-gray-200');
+            });
+            el.classList.add('border-emerald-600', 'bg-emerald-50');
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('fullName').value || "Không có tên";
+            const phone = document.getElementById('phone').value || "Không có SĐT";
+            
+            const insEl = document.getElementById('insurance');
+            insuranceChecked = insEl ? insEl.checked : false;
+            
+            // Donation removed from UI for this condition - always report "Khong"
+            donationChecked = false;
+            
+            const shareEl = document.getElementById('share-data');
+            shareDataChecked = shareEl ? shareEl.checked : false;
+            
+            let formUrl = "https://forms.gle/iFP37ubmmFBRX1286";
+            
+            const params = new URLSearchParams({
+                "entry.123456789": `Nhom_${currentGroup}`,
+                "entry.987654321": insuranceChecked ? "Co" : "Khong",
+                "entry.1122334455": donationChecked ? "Co" : "Khong",  // kept entry, always "Khong"
+                "entry.6677889900": name,
+                "entry.5544332211": phone,
+                "entry.9988776655": (currentGroup === 2 || currentGroup === 4) ? "Co_VIP_Drip" : "Khong",
+                "entry.2233445566": shareDataChecked ? "Co" : "Khong"
+            });
+            
+            const finalUrl = `${formUrl}?${params.toString()}`;
+            
+            console.log(` Chuyển hướng đến Google Form - Nhóm ${currentGroup}`);
+            window.location.href = finalUrl;
+        }
+
+        function initialize() {
+            assignGroup();
+            setupCheckboxes();
+            setupNudges();
+            
+            document.getElementById('checkout-form').addEventListener('submit', handleSubmit);
+            
+            // Demo pre-fill
+            if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+                document.getElementById('fullName').value = "Nguyễn Văn A";
+                document.getElementById('phone').value = "0912345678";
+                document.getElementById('email').value = "example@email.com";
+                document.getElementById('address').value = "123 Đường ABC, Quận 1, TP. HCM";
+            }
+        }
+
+        window.onload = initialize;
+    </script>
+</body>
+</html>
