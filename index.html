@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenWear - Thanh toán</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .product-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .tail-container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .tiny-text {
+            font-size: 9px;
+            line-height: 1.1;
+            color: #9ca3af;
+        }
+        
+        .drip-fee {
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b sticky top-0 z-50">
+            <div class="tail-container px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">G</div>
+                    <div>
+                        <span class="font-semibold text-2xl tracking-tight">GreenWear</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-8 text-sm">
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Cửa hàng</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Bộ sưu tập</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">Về chúng tôi</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 tail-container px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column - Order Summary -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-3xl shadow-sm border p-8 sticky top-24">
+                    <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-emerald-600"></i>
+                        Đơn hàng của bạn
+                    </h2>
+                    
+                    <!-- Product -->
+                    <div class="flex gap-6">
+                        <div class="w-28 h-28 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                            <img src="https://i.postimg.cc/Hx0Cc895/goods-478230-sub14-3x4.avif" 
+                                 alt="Áo khoác Unecclo" 
+                                 class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div>
+                                <h3 class="font-semibold text-lg">Áo khoác Unecclo</h3>
+                                <p class="text-sm text-gray-500">Màu Xanh Lá • Size M</p>
+                                <!-- Price on its own line below color/size -->
+                                <p class="font-semibold text-xl mt-1">499.000 đ</p>
+                            </div>
+                            <p class="text-xs text-emerald-600 mt-2 flex items-center gap-1">
+                                <i class="fa-solid fa-leaf"></i> Sản phẩm thân thiện môi trường
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Scarcity Nudge: Only for Group 2 and Group 4 -->
+                    <div id="scarcity-nudge" class="hidden mt-6 p-4 bg-pink-50 border border-pink-300 rounded-2xl">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-users text-pink-500 mt-1"></i>
+                            <div class="flex-1">
+                                <div class="font-bold text-lg text-pink-700">Chỉ còn 1 sản phẩm cuối cùng!</div>
+                                <div class="mt-1 text-sm text-pink-600 font-medium">
+                                    Hơn 1.284 người đã xem qua sản phẩm này!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t my-8"></div>
+
+                    <!-- Add-ons -->
+                    <div id="addons-container" class="space-y-4">
+                        <!-- Bảo hiểm giao hàng -->
+                        <div class="flex items-center justify-between text-sm">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="insurance" 
+                                       class="w-5 h-5 accent-emerald-600">
+                                <div>
+                                    <span class="font-medium">Bảo hiểm giao hàng</span>
+                                    <p class="text-xs text-gray-500">Bảo vệ đơn hàng đến tay bạn</p>
+                                </div>
+                            </label>
+                            <span class="font-medium text-emerald-700">+20.000 đ</span>
+                        </div>
+
+                        <!-- Chia sẻ dữ liệu mua sắm (Disadvantageous Defaults nudge) -->
+                        <div class="flex items-center justify-between text-sm">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="share-data" 
+                                       class="w-5 h-5 accent-emerald-600">
+                                <div>
+                                    <span class="font-medium">Chia sẻ dữ liệu mua sắm</span>
+                                    <p class="text-xs text-gray-500">Để nhận gợi ý sản phẩm và ưu đãi tốt hơn</p>
+                                </div>
+                            </label>
+                            <span class="text-xs text-gray-400">Miễn phí</span>
+                        </div>
+                    </div>
+
+                    <!-- Drip Pricing Fee: Only for Group 2 and Group 4 -->
+                    <div id="drip-fee" class="hidden mt-4 pt-4 border-t drip-fee">
+                        <div class="flex justify-between items-center">
+                            <span>Phí XL&amp;VH</span>
+                            <span class="font-medium">+45.000 đ</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t my-8"></div>
+
+                    <!-- Total -->
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-gray-600">Tổng cộng</span>
+                        <div class="text-right">
+                            <span id="total-price" class="text-3xl font-bold">499.000</span>
+                            <span class="text-sm text-gray-500">đ</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 text-right mt-1">Đã bao gồm VAT</p>
+                </div>
+            </div>
+
+            <!-- Right Column - Checkout Form -->
+            <div class="lg:col-span-7">
+                <div class="max-w-xl">
+                    <h1 class="text-3xl font-bold mb-2">Hoàn tất thanh toán</h1>
+                    <p class="text-gray-600 mb-8">Chỉ còn một bước nữa là bạn sẽ sở hữu chiếc áo khoác bền vững này.</p>
+
+                    <!-- Shipping Form -->
+                    <form id="checkout-form" class="space-y-8">
+                        <div>
+                            <h3 class="font-semibold mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-truck text-emerald-600"></i>
+                                Thông tin giao hàng
+                            </h3>
+                            
+                            <div class="grid grid-cols-1 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                                    <input type="text" id="fullName" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                                        <input type="tel" id="phone" required
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" id="email" required
+                                               class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Địa chỉ giao hàng</label>
+                                    <textarea id="address" rows="3" required
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div>
+                            <h3 class="font-semibold mb-4">Phương thức thanh toán</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border-2 border-emerald-600 bg-emerald-50 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-credit-card text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">Thẻ tín dụng</p>
+                                </div>
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-qrcode text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">Ví điện tử</p>
+                                </div>
+                                <div onclick="selectPayment(this)" 
+                                     class="payment-option border border-gray-200 hover:border-gray-300 rounded-2xl p-4 text-center cursor-pointer">
+                                    <i class="fa-solid fa-money-bill-wave text-2xl mb-2"></i>
+                                    <p class="font-medium text-sm">COD</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-semibold py-4 rounded-3xl text-lg shadow-lg shadow-emerald-200 flex items-center justify-center gap-3 relative">
+                            HOÀN TẤT THANH TOÁN
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manipulation Modal -->
+    <div id="manipulate-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[200]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <div class="text-center">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-5xl mb-4"></i>
+                <h3 class="font-semibold text-xl mb-3">Bạn có chắc muốn bỏ lựa chọn này?</h3>
+                <p id="modal-text" class="text-gray-600 leading-relaxed"></p>
+                
+                <div class="flex gap-4 mt-8">
+                    <button onclick="closeModal(false)" 
+                            class="flex-1 py-3.5 border border-gray-300 rounded-2xl font-medium hover:bg-gray-50">
+                        Để sau
+                    </button>
+                    <button onclick="closeModal(true)" 
+                            class="flex-1 py-3.5 bg-red-600 text-white rounded-2xl font-medium hover:bg-red-700">
+                        Vẫn bỏ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stealth Timer Warning Modal (new for time enforcement) -->
+    <div id="timer-warning-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[200]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <div class="text-center">
+                <i class="fa-solid fa-clock text-amber-500 text-5xl mb-4"></i>
+                <h3 class="font-semibold text-xl mb-3">Vui lòng xem kỹ trước khi thanh toán</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Vui lòng dành ít nhất <strong>1 phút 30 giây</strong> để xem kỹ thông tin đơn hàng và các điều khoản trước khi thanh toán.
+                </p>
+                <button onclick="closeTimerWarningModal()" 
+                        class="w-full py-3.5 bg-emerald-600 text-white rounded-2xl font-medium hover:bg-emerald-700 transition-colors">
+                    Tôi đã hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // EXPERIMENT SETUP: 4 Groups with Nudges
+        // ============================================
+        let currentGroup = 1; // 1 = Control, 2 = Drip+Scarcity, 3 = Pre-tick+Modal, 4 = All nudges
+
+        let insuranceChecked = false;
+        let shareDataChecked = false;
+
+        // ============================================
+        // STEALTH TIMER (Bộ đếm thời gian ngầm)
+        // User must stay at least 90 seconds before submitting
+        // ============================================
+        const MIN_STAY_TIME_MS = 90 * 1000; // 90 seconds
+        let experimentStartTime = null;
+
+        /**
+         * Async function to assign user to a group using quota-controlled endpoint.
+         * 
+         * Priority:
+         * 1. If a group is already saved in sessionStorage → use it (consistent across refreshes)
+         * 2. Fetch availableGroups from Apps Script endpoint
+         * 3. If no groups available → show full message and stop experiment
+         * 4. Randomly pick one from availableGroups
+         * 5. On any fetch error → fallback to simple random (1-4)
+         */
+        async function assignGroup() {
+            const STORAGE_KEY = 'experimentGroup';
+
+            // 1. Check if user already has an assigned group in this session
+            const saved = sessionStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                currentGroup = parseInt(saved, 10);
+                console.log(`%c[Experiment] Sử dụng group từ sessionStorage: Nhóm ${currentGroup}`, 'color: #10b981; font-weight: bold; font-size: 14px');
+                return;
+            }
+
+            const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwAEU2QISrOKScK3eg1nfL5QOODzhFuNsR0CfkzZAGEKmMx6JZuzk179E3IFUVXWLTveQ/exec';
+
+            try {
+                // 2. Fetch available groups from quota system (with 8s timeout)
+                const fetchWithTimeout = (url, ms = 8000) => {
+                    return Promise.race([
+                        fetch(url),
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Request timeout')), ms)
+                        )
+                    ]);
+                };
+
+                const response = await fetchWithTimeout(ENDPOINT);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const availableGroups = Array.isArray(data.availableGroups) ? data.availableGroups : [];
+
+                // 3. If no quota left → show full message
+                if (availableGroups.length === 0) {
+                    showExperimentFullMessage();
+                    currentGroup = 0; // mark as full
+                    return;
+                }
+
+                // 4. Randomly select one of the available groups
+                const randomIndex = Math.floor(Math.random() * availableGroups.length);
+                currentGroup = availableGroups[randomIndex];
+
+                // 5. Persist to sessionStorage for refresh consistency
+                sessionStorage.setItem(STORAGE_KEY, currentGroup);
+
+                console.log(`%c[Experiment] Đã phân bổ từ endpoint vào Nhóm ${currentGroup}`, 'color: #10b981; font-weight: bold; font-size: 14px');
+
+            } catch (error) {
+                // 6. Fallback to simple random if fetch fails (network error, timeout, etc.)
+                currentGroup = Math.ceil(Math.random() * 4);
+                sessionStorage.setItem(STORAGE_KEY, currentGroup);
+
+                console.warn(`%c[Experiment] Fetch thất bại, dùng fallback random: Nhóm ${currentGroup}`, 'color: #f59e0b; font-size: 13px');
+                console.error(error);
+            }
+        }
+
+        /**
+         * Replaces the entire page content with a professional "experiment full" message.
+         * Called when the quota endpoint returns no available groups.
+         */
+        function showExperimentFullMessage() {
+            document.body.innerHTML = `
+                <div class="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+                    <div class="max-w-md w-full bg-white rounded-3xl shadow-sm border p-10 text-center">
+                        <div class="mx-auto w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-exclamation-circle text-3xl text-amber-500"></i>
+                        </div>
+                        <h1 class="text-2xl font-semibold mb-4">Thí nghiệm đã đủ số lượng mẫu</h1>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Cảm ơn bạn đã quan tâm tham gia nghiên cứu của chúng tôi.<br>
+                            Hiện tại chúng tôi đã thu thập đủ dữ liệu cho thí nghiệm này.
+                        </p>
+                        <div class="text-sm text-gray-500">
+                            Bạn có thể đóng tab này hoặc quay lại sau.<br>
+                            Nếu bạn là người tham gia thử nghiệm, vui lòng liên hệ đội ngũ nghiên cứu để biết thêm chi tiết.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Calculates and updates the total price.
+         * Base price: 499.000đ
+         * - Insurance: +20.000đ (if checked)
+         * - Drip Pricing Fee: +45.000đ (only shown in groups 2 and 4)
+         */
+        function updateTotal() {
+            let total = 499000;
+
+            const insuranceEl = document.getElementById('insurance');
+            if (insuranceEl && insuranceEl.checked) {
+                total += 20000;
+            }
+
+            // Drip pricing fee only applies to Group 2 and Group 4
+            const hasDrip = (currentGroup === 2 || currentGroup === 4);
+            if (hasDrip) {
+                total += 45000;
+            }
+
+            document.getElementById('total-price').textContent = total.toLocaleString('vi-VN');
+        }
+
+        /**
+         * Sets up the two add-on checkboxes.
+         * Pre-ticking logic:
+         * - Only in Group 3 and Group 4: both checkboxes are pre-checked.
+         * - Group 1 and Group 2: start unchecked.
+         */
+        function setupCheckboxes() {
+            const isPreChecked = (currentGroup === 3 || currentGroup === 4);
+
+            const insurance = document.getElementById('insurance');
+            const shareData = document.getElementById('share-data');
+
+            if (insurance) {
+                insurance.checked = isPreChecked;
+                insurance.addEventListener('change', handleCheckboxChange);
+            }
+
+            if (shareData) {
+                shareData.checked = isPreChecked;
+                shareData.addEventListener('change', handleCheckboxChange);
+            }
+
+            // Update initial total
+            updateTotal();
+        }
+
+        /**
+         * Handles checkbox change events.
+         * In Group 3 and Group 4:
+         * - Attempting to uncheck "Bảo hiểm giao hàng" or "Chia sẻ dữ liệu mua sắm" triggers the manipulation modal.
+         * - This creates friction (Autonomy-compromising nudge).
+         */
+        function handleCheckboxChange(e) {
+            const checkbox = e.target;
+            const manipulatableIds = ['insurance', 'share-data'];
+
+            // Only apply modal friction in Group 3 and Group 4
+            if (!checkbox.checked && (currentGroup === 3 || currentGroup === 4) && manipulatableIds.includes(checkbox.id)) {
+                e.preventDefault();
+                showManipulationModal(checkbox.id, checkbox);
+                return;
+            }
+
+            // Update state variables
+            const insuranceEl = document.getElementById('insurance');
+            insuranceChecked = insuranceEl ? insuranceEl.checked : false;
+
+            const shareEl = document.getElementById('share-data');
+            shareDataChecked = shareEl ? shareEl.checked : false;
+
+            updateTotal();
+        }
+
+        /**
+         * Shows the manipulation modal with persuasive text.
+         * Different messages are shown depending on which checkbox the user tries to uncheck.
+         */
+        function showManipulationModal(type, checkbox) {
+            const modal = document.getElementById('manipulate-modal');
+            const modalText = document.getElementById('modal-text');
+
+            if (type === 'insurance') {
+                modalText.innerHTML = `Nếu không mua bảo hiểm, đơn hàng của bạn <strong>có nguy cơ bị hư hỏng hoặc mất mát</strong> trong quá trình vận chuyển. Bạn thực sự muốn mạo hiểm chứ?`;
+            } else if (type === 'share-data') {
+                modalText.innerHTML = `Tắt chia sẻ dữ liệu có thể khiến bạn bỏ lỡ <strong>các gợi ý sản phẩm và ưu đãi tốt hơn</strong>. Bạn có chắc muốn bỏ qua không?`;
+            }
+
+            modal.classList.remove('hidden');
+            modal.dataset.targetCheckbox = checkbox.id;
+        }
+
+        /**
+         * Closes the manipulation modal.
+         * If user confirms "Vẫn bỏ", the checkbox is unchecked after a short delay (artificial friction).
+         */
+        function closeModal(confirmUncheck) {
+            const modal = document.getElementById('manipulate-modal');
+            const checkboxId = modal.dataset.targetCheckbox;
+            const checkbox = document.getElementById(checkboxId);
+
+            modal.classList.add('hidden');
+
+            if (confirmUncheck && checkbox) {
+                // Small artificial delay to create friction
+                setTimeout(() => {
+                    checkbox.checked = false;
+
+                    const insuranceEl = document.getElementById('insurance');
+                    insuranceChecked = insuranceEl ? insuranceEl.checked : false;
+
+                    const shareEl = document.getElementById('share-data');
+                    shareDataChecked = shareEl ? shareEl.checked : false;
+
+                    updateTotal();
+                }, 420);
+            }
+        }
+
+        /**
+         * Sets up nudges that are shown/hidden depending on the assigned group.
+         *
+         * Group rules:
+         * - Group 1: Nothing
+         * - Group 2: Drip fee + Scarcity nudge
+         * - Group 3: Only pre-ticked checkboxes + modal (handled in setupCheckboxes)
+         * - Group 4: All nudges combined (Drip + Scarcity + Pre-tick + Modal)
+         */
+        function setupNudges() {
+            const showDripAndScarcity = (currentGroup === 2 || currentGroup === 4);
+            const showScarcity = (currentGroup === 2 || currentGroup === 4);
+
+            // Drip Pricing Fee (only for Group 2 and 4)
+            const dripFeeEl = document.getElementById('drip-fee');
+            if (dripFeeEl) {
+                if (showDripAndScarcity) {
+                    dripFeeEl.classList.remove('hidden');
+                } else {
+                    dripFeeEl.classList.add('hidden');
+                }
+            }
+
+            // Scarcity nudge (social proof + urgency) - only Group 2 & 4
+            const scarcityNudge = document.getElementById('scarcity-nudge');
+            if (scarcityNudge) {
+                if (showScarcity) {
+                    scarcityNudge.classList.remove('hidden');
+                } else {
+                    scarcityNudge.classList.add('hidden');
+                }
+            }
+        }
+
+        /**
+         * Handles payment method selection UI.
+         */
+        function selectPayment(el) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('border-emerald-600', 'bg-emerald-50');
+                opt.classList.add('border-gray-200');
+            });
+            el.classList.add('border-emerald-600', 'bg-emerald-50');
+        }
+
+        // ============================================
+        // STEALTH TIMER FUNCTIONS
+        // ============================================
+
+        /**
+         * Gets the elapsed time since page load (in ms).
+         * Uses sessionStorage so it persists across refreshes.
+         */
+        function getElapsedTimeMs() {
+            const storedStart = sessionStorage.getItem('experimentStartTime');
+            if (!storedStart) {
+                return 0;
+            }
+            return Date.now() - parseInt(storedStart, 10);
+        }
+
+        /**
+         * Shows the timer warning modal when user tries to submit too early.
+         */
+        function showTimerWarningModal() {
+            const modal = document.getElementById('timer-warning-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Closes the timer warning modal.
+         */
+        function closeTimerWarningModal() {
+            const modal = document.getElementById('timer-warning-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Handles form submission.
+         * Redirects to Google Form with experiment data for analysis.
+         * 
+         * STEALTH TIMER CHECK:
+         * - If less than 90 seconds have passed, block submission and show warning.
+         * - The timer is completely hidden from the user until they try to submit early.
+         */
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            // Stealth timer enforcement
+            const elapsed = getElapsedTimeMs();
+            if (elapsed < MIN_STAY_TIME_MS) {
+                // Block submit and show warning
+                showTimerWarningModal();
+                return;
+            }
+
+            const name = document.getElementById('fullName').value || "Không có tên";
+            const phone = document.getElementById('phone').value || "Không có SĐT";
+
+            // Refresh latest state
+            const insuranceEl = document.getElementById('insurance');
+            insuranceChecked = insuranceEl ? insuranceEl.checked : false;
+
+            const shareEl = document.getElementById('share-data');
+            shareDataChecked = shareEl ? shareEl.checked : false;
+
+            const formUrl = "https://forms.gle/iFP37ubmmFBRX1286";
+
+            // Build query parameters for Google Form
+            const params = new URLSearchParams({
+                "entry.123456789": `Nhom_${currentGroup}`,                    // Group assignment
+                "entry.987654321": insuranceChecked ? "Co" : "Khong",         // Insurance checkbox
+                "entry.1122334455": shareDataChecked ? "Co" : "Khong",        // Share data checkbox
+                "entry.6677889900": name,                                     // Full name
+                "entry.5544332211": phone,                                    // Phone
+                "entry.9988776655": (currentGroup === 2 || currentGroup === 4) ? "Co_Drip" : "Khong" // Drip indicator (for groups 2 & 4)
+            });
+
+            const finalUrl = `${formUrl}?${params.toString()}`;
+
+            console.log(`[Experiment] Redirecting to Google Form - Group ${currentGroup}`);
+            window.location.href = finalUrl;
+        }
+
+        /**
+         * Main initialization function.
+         * Runs when the page loads.
+         */
+        async function initialize() {
+            // STEP 1: Assign group using new quota-controlled async logic
+            await assignGroup();
+
+            // If experiment quota is full, the page content has been replaced.
+            // We stop initialization here to avoid errors.
+            if (currentGroup === 0 || !document.getElementById('checkout-form')) {
+                return;
+            }
+
+            // ============================================
+            // STEALTH TIMER: Start the hidden 90-second timer
+            // Use sessionStorage so time persists if user refreshes
+            // ============================================
+            const storedStartTime = sessionStorage.getItem('experimentStartTime');
+            if (!storedStartTime) {
+                experimentStartTime = Date.now();
+                sessionStorage.setItem('experimentStartTime', experimentStartTime);
+            } else {
+                experimentStartTime = parseInt(storedStartTime, 10);
+            }
+
+            // STEP 2: Setup checkboxes with group-specific pre-tick logic
+            setupCheckboxes();
+
+            // STEP 3: Show/hide nudges based on group
+            setupNudges();
+
+            // STEP 4: Attach form submit handler
+            document.getElementById('checkout-form').addEventListener('submit', handleSubmit);
+
+            // Optional: Demo pre-fill when testing locally
+            if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+                document.getElementById('fullName').value = "Nguyễn Văn A";
+                document.getElementById('phone').value = "0912345678";
+                document.getElementById('email').value = "example@email.com";
+                document.getElementById('address').value = "123 Đường ABC, Quận 1, TP. HCM";
+            }
+
+            // Initial total calculation
+            updateTotal();
+        }
+
+        // Boot the application
+        window.onload = initialize;
+    </script>
+</body>
+</html>
